@@ -7,7 +7,6 @@ import android.text.Editable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     Button button_start = null;
 
     private int duration = 0;
-    Editable user_input;
+    Editable str_duration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,16 +24,14 @@ public class MainActivity extends AppCompatActivity {
         editText_duration = findViewById(R.id.editText_duration);
         button_start = findViewById(R.id.button_start);
 
-        Toast.makeText(this, "abc", Toast.LENGTH_SHORT).show();
-
         button_start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                user_input = editText_duration.getText();
-                if (!user_input.toString().isEmpty() && android.text.TextUtils.isDigitsOnly(user_input)) {
-                    // Toast.makeText(MainActivity.this, Integer.toString(duration), Toast.LENGTH_SHORT).show();
-
+                str_duration = editText_duration.getText();
+                if (!str_duration.toString().isEmpty() && android.text.TextUtils.isDigitsOnly(str_duration)) {
                     duration = Integer.parseInt(String.valueOf(editText_duration.getText()));
+
+                    // Send duration to TimerCountdownActivity and start that activity
                     Intent intent = new Intent(MainActivity.this, TimerCountdownActivity.class);
                     intent.putExtra("DURATION", duration);
                     startActivity(intent);
