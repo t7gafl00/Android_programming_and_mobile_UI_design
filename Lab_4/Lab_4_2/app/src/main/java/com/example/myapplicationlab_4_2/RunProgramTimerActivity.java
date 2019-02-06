@@ -41,6 +41,16 @@ public class RunProgramTimerActivity extends AppCompatActivity {
             total_duration += workouts_array_list.get(i).getDuration() + 1;
         }
 
+        ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                ttobj.setLanguage(Locale.US);
+                startCountdown(total_duration);
+            }
+        });
+    }
+
+    private void startCountdown(int total_duration) {
         new CountDownTimer(total_duration * 1000, 1000) {
 
             int i = 0;
@@ -56,14 +66,7 @@ public class RunProgramTimerActivity extends AppCompatActivity {
 
                     message_to_say = workouts_array_list.get(i).getActivity_type() + Integer.toString(workouts_array_list.get(i).getDuration()) + "seconds";
 
-                    ttobj = new TextToSpeech(getApplicationContext(), new TextToSpeech.OnInitListener() {
-                        @Override
-                        public void onInit(int status) {
-                            ttobj.setLanguage(Locale.US);
-                            //ttobj.speak("", TextToSpeech.QUEUE_FLUSH, null);
-                            ttobj.speak(message_to_say, TextToSpeech.QUEUE_FLUSH, null);
-                        }
-                    });
+                    ttobj.speak(message_to_say, TextToSpeech.QUEUE_FLUSH, null);
                 }
 
                 activity_type_TextView.setText(workouts_array_list.get(i).getActivity_type());
