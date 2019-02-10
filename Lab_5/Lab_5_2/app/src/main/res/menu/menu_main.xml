@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.lab_5_2.ui.MainActivity">
+
+    <item
+        android:id="@+id/sort_item"
+        android:orderInCategory="100"
+        android:title="Sort items based on due date"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/today_item"
+        android:orderInCategory="100"
+        android:title="Today"
+        app:showAsAction="always" />
+
+</menu>
