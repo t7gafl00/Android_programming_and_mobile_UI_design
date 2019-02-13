@@ -26,6 +26,7 @@ public class ToDoModel {
         values.put(ToDoItemContract.ToDoItem.COLUMN_NAME_NAME, addable.name);
         values.put(ToDoItemContract.ToDoItem.COLUMN_NAME_DESCRIPTION, addable.description);
         values.put(ToDoItemContract.ToDoItem.COLUMN_NAME_DATE, addable.date);
+        values.put(ToDoItemContract.ToDoItem.COLUMN_NAME_CHECKED, addable.checked);
 
         // Insert the new row, returning the primary key value of the new row
         long newRowId = db.insert(ToDoItemContract.ToDoItem.TABLE_NAME, null, values);
@@ -34,7 +35,6 @@ public class ToDoModel {
     public void deleteToDoItemFromDb(ToDoItem deletable) {
         // Gets the data repository in write mode
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-
         // Define 'where' part of query.
         String selection = ToDoItemContract.ToDoItem.COLUMN_NAME_NAME + " LIKE ?";
         // Specify arguments in placeholder order.
@@ -51,11 +51,11 @@ public class ToDoModel {
         switch (sort_value) {
             case 0:
                 cursor = db.rawQuery(
-                        "SELECT name, description, (strftime('%d.%m.%Y', date)) AS date FROM toDoItems ", new String[0]);
+                        "SELECT name, description, (strftime('%d.%m.%Y', date)) AS date, checked FROM toDoItems ", new String[0]);
                 break;
             case 1:
                 cursor = db.rawQuery(
-                        "SELECT name, description, (strftime('%d.%m.%Y', date)) AS date FROM toDoItems " +
+                        "SELECT name, description, (strftime('%d.%m.%Y', date)) AS date, checked FROM toDoItems " +
                                 "ORDER BY strftime('%Y.%m.%d', date) ASC ", new String[0]);
                 break;
         }
@@ -67,9 +67,33 @@ public class ToDoModel {
         SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(
-                "SELECT name, description, (strftime('%d.%m.%Y', date)) AS date FROM toDoItems " +
+                "SELECT name, description, (strftime('%d.%m.%Y', date)) AS date, checked FROM toDoItems " +
                         "WHERE date = date('now')", new String[0]);
 
         return cursor;
+    }
+
+    public void setChecked(ToDoItem toDoItem) {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("checked","1");
+
+        String where = ToDoItemContract.ToDoItem.COLUMN_NAME_NAME + " LIKE ?";
+        String[] whereArgs = { toDoItem.getName() };
+
+        db.update(ToDoItemContract.ToDoItem.TABLE_NAME, cv, where, whereArgs);
+    }
+
+    public void setUnchecked(ToDoItem toDoItem) {
+        SQLiteDatabase db = mDbHelper.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+        cv.put("checked","0");
+
+        String where = ToDoItemContract.ToDoItem.COLUMN_NAME_NAME + " LIKE ?";
+        String[] whereArgs = { toDoItem.getName() };
+
+        db.update(ToDoItemContract.ToDoItem.TABLE_NAME, cv, where, whereArgs);
     }
 }

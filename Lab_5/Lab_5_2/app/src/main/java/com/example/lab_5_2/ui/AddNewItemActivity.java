@@ -61,7 +61,7 @@ public class AddNewItemActivity extends AppCompatActivity{
                 String description = String.valueOf(description_EditText.getText());
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String date = sdf.format(new Date(date_calendarView.getDate()));
-                ToDoItem toDoItem = new ToDoItem(name, description, date);
+                ToDoItem toDoItem = new ToDoItem(name, description, date, 0);
                 model.addToDoItemToDb(toDoItem);
                 this.finish();
                 return true;

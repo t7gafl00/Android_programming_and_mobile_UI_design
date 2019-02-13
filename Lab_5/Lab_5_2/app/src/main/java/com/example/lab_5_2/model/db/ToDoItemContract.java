@@ -13,5 +13,6 @@ public class ToDoItemContract {
         public static final String COLUMN_NAME_NAME = "name";
         public static final String COLUMN_NAME_DESCRIPTION = "description";
         public static final String COLUMN_NAME_DATE = "date";
+        public static final String COLUMN_NAME_CHECKED = "checked";
     }
 }

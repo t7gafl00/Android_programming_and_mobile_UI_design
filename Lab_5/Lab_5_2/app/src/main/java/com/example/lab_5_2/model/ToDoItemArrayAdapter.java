@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.lab_5_2.R;
@@ -27,12 +27,20 @@ public class ToDoItemArrayAdapter extends ArrayAdapter<ToDoItem> {
 
         convertView = LayoutInflater.from(getContext()).inflate(R.layout.todoitem_list_item, parent, false);
 
-        TextView item_name = convertView.findViewById(R.id.todoitem_name_CheckedTextView);
+        TextView item_name = convertView.findViewById(R.id.todoitem_list_name_CheckedTextView);
         item_name.setText(todoitem.getName());
         TextView item_description = convertView.findViewById(R.id.todoitem_list_description_TextView);
         item_description.setText(todoitem.getDescription());
         TextView item_date = convertView.findViewById(R.id.todoitem_list_date_TextView);
         item_date.setText(todoitem.getDate());
+        CheckBox item_checked = convertView.findViewById(R.id.todoitem_list_CheckBox);
+        if (todoitem.getChecked() == 1) {
+            item_checked.setChecked(true);
+        } else {
+            item_checked.setChecked(false);
+        }
+
+
 
         return convertView;
     }

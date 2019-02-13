@@ -11,13 +11,14 @@ public class ToDoItemDbHelper extends SQLiteOpenHelper {
                     ToDoItemContract.ToDoItem._ID + " INTEGER PRIMARY KEY," +
                     ToDoItemContract.ToDoItem.COLUMN_NAME_NAME + " TEXT," +
                     ToDoItemContract.ToDoItem.COLUMN_NAME_DESCRIPTION + " TEXT," +
-                    ToDoItemContract.ToDoItem.COLUMN_NAME_DATE + " DATE )" ;
+                    ToDoItemContract.ToDoItem.COLUMN_NAME_DATE + " DATE," +
+                    ToDoItemContract.ToDoItem.COLUMN_NAME_CHECKED + " INTEGER )" ;
 
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + ToDoItemContract.ToDoItem.TABLE_NAME;
 
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 4;
     public static final String DATABASE_NAME = "ToDoItemDatabase.db";
 
     public ToDoItemDbHelper(Context context) {

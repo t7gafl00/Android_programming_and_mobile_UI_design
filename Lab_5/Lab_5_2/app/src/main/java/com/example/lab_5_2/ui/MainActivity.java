@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.lab_5_2.R;
 import com.example.lab_5_2.model.ToDoItem;
@@ -62,10 +63,34 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         });
                 AlertDialog dialog = builder.create();
                 dialog.show();
-
                 return false;
             }
         });
+    }
+
+    public void onCheckboxClicked(View view) {
+        boolean checked = ((CheckBox) view).isChecked();
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.todoitem_list_CheckBox:
+                if (checked) {
+                    View parentRow = (View) view.getParent();
+                    ListView listView = (ListView) parentRow.getParent();
+                    final int position = listView.getPositionForView(parentRow);
+                    toDoItem = (ToDoItem) listView.getItemAtPosition(position);
+                    model.setChecked(toDoItem);
+                    refreshList(0, 0);
+                }
+                else {
+                    View parentRow = (View) view.getParent();
+                    ListView listView = (ListView) parentRow.getParent();
+                    final int position = listView.getPositionForView(parentRow);
+                    toDoItem = (ToDoItem) listView.getItemAtPosition(position);
+                    model.setUnchecked(toDoItem);
+                    refreshList(0, 0);
+                }
+                break;
+        }
     }
 
     @Override
@@ -124,8 +149,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String name = (cursor.getString(cursor.getColumnIndexOrThrow(ToDoItemContract.ToDoItem.COLUMN_NAME_NAME)));
             String description = (cursor.getString(cursor.getColumnIndexOrThrow(ToDoItemContract.ToDoItem.COLUMN_NAME_DESCRIPTION)));
             String date = (cursor.getString(cursor.getColumnIndexOrThrow(ToDoItemContract.ToDoItem.COLUMN_NAME_DATE)));
+            int checked = cursor.getInt(cursor.getColumnIndexOrThrow(ToDoItemContract.ToDoItem.COLUMN_NAME_CHECKED));
 
-            ToDoItem toDoItem = new ToDoItem(name, description, date);
+            ToDoItem toDoItem = new ToDoItem(name, description, date, checked);
             toDoItems_ArrayList.add(toDoItem);
         }
         cursor.close();

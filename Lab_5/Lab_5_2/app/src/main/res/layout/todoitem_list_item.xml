@@ -3,39 +3,49 @@
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/todoitem_name_CheckedTextView"
+    <CheckBox
+        android:id="@+id/todoitem_list_CheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:paddingTop="40dp"
+        android:focusable="false"
+        android:onClick="onCheckboxClicked"/>
+
+    <TextView
+        android:id="@+id/todoitem_list_name_CheckedTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/todoitem_list_CheckBox"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:hint="NAME" />
 
     <TextView
         android:id="@+id/todoitem_list_date_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@+id/todoitem_name_CheckedTextView"
+        app:layout_constraintTop_toTopOf="@+id/todoitem_list_name_CheckedTextView"
         app:layout_constraintRight_toRightOf="parent"
         android:paddingTop="10dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:hint="DATE"/>
 
     <TextView
         android:id="@+id/todoitem_list_description_TextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/todoitem_name_CheckedTextView"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/todoitem_list_name_CheckedTextView"
+        app:layout_constraintLeft_toRightOf="@+id/todoitem_list_CheckBox"
         android:paddingBottom="10dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:hint="Description"
         />
 

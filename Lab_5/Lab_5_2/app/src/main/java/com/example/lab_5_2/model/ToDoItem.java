@@ -5,11 +5,13 @@ public class ToDoItem {
     String name = null;
     String description = null;
     String date = null;
+    int checked = 0;
 
-    public ToDoItem(String name, String description, String date) {
+    public ToDoItem(String name, String description, String date, int checked) {
         this.name = name;
         this.description = description;
         this.date = date;
+        this.checked = checked;
     }
 
     public String getName() {
@@ -35,4 +37,13 @@ public class ToDoItem {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int getChecked() {
+        return checked;
+    }
+
+    public void setChecked(int checked) {
+        this.checked = checked;
+    }
+
 }
