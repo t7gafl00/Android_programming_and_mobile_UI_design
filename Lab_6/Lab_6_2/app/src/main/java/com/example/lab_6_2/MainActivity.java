@@ -8,6 +8,8 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
+    static final String SHARED_PREF_EDITOR_TEXT_KEY = "text";
+
     private String saved_text;
     EditText saved_text_edittext = null;
 
@@ -19,11 +21,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sharedPref = getSharedPreferences("", Context.MODE_PRIVATE);
-        saved_text = sharedPref.getString("textKey", "");
-        editor = sharedPref.edit();
-
         saved_text_edittext = findViewById(R.id.saved_text_edittext);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        sharedPref = getSharedPreferences("", Context.MODE_PRIVATE);
+        saved_text = sharedPref.getString(SHARED_PREF_EDITOR_TEXT_KEY, "");
         saved_text_edittext.setText(saved_text);
     }
 
@@ -33,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
 
         saved_text = saved_text_edittext.getText().toString();
 
-        editor.putString("textKey", saved_text);
+        editor = sharedPref.edit();
+        editor.putString(SHARED_PREF_EDITOR_TEXT_KEY, saved_text);
         editor.apply();
     }
 }
