@@ -8,13 +8,11 @@ import android.os.Build;
 public class MoveApplication extends Application {
 
     static final String CHANNEL_ID = "NOTIFICATION_CHANNEL_ID";
-    static MoveApplication instance = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        instance = this;
         createNotificationChannel();
     }
 
