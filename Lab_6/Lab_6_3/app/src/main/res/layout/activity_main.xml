@@ -14,7 +14,7 @@
         android:text="Set the minute interval for activity reminder" />
 
     <EditText
-        android:id="@+id/time_edittext"
+        android:id="@+id/duration_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="15" />
